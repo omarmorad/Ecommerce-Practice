@@ -1,8 +1,3 @@
-code
-PHP
-download
-content_copy
-expand_less
 <?php
 
 namespace App\Http\Controllers\Api;
