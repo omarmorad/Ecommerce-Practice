@@ -70,4 +70,28 @@ class AuthController extends BaseController
         ]);
 
     }
+public function Logout(Request $request){
+    // Add null check for user
+    $user = $request->user();
+
+    if (!$user) {
+        return response()->json([
+            'message' => 'Unauthenticated'
+        ], 401);
+    }
+
+    // Now safe to call currentAccessToken()
+    $currentToken = $request->user()->currentAccessToken();
+    if ($currentToken) {
+        $currentToken->delete();
+        return response()->json([
+            'message' => 'Logged out successfully'
+        ]);
+    } else {
+        return response()->json([
+            'message' => 'No active token found'
+        ], 401);
+    }
+}
+
 }
